@@ -1,10 +1,19 @@
 const express = require('express');
-const app = express();
-
 let books = require('./booksdb');
 
+const users = require('./auth_users.js').users;
 const public_users = express.Router();
 
+const doesExist = (username) => {
+    const result = users.filter( user => user.username == username);
+    if (result.length > 0) {
+        return true
+    } else {
+        return false
+    }
+}
+
+// Route: Get all books based on title
 public_users.get('/', (req, res) => {
     res.send(JSON.stringify(books)); // return all books
 })
@@ -49,5 +58,29 @@ public_users.get('/review/:isbn', (req, res) => {
     }
     res.status(200).json(result);
 })
+
+// Route: Register a new user
+public_users.post('/register', (req, res) => {
+
+    const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+        return res.status(400).json({ message: "Username, email, and password are required" });
+    }
+    
+    if (!doesExist(username)) {
+        users.push({
+            "username":username,
+            "email": email,
+            "password":password
+        })
+        console.log(users);
+        return res.status(200).json({ message:  "username registered" })
+    }
+    
+    res.status(400).json({ message: "choose other usarname!" });
+    
+});
+
 
 module.exports.general = public_users;
