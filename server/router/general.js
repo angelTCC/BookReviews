@@ -74,7 +74,7 @@ public_users.post('/register', (req, res) => {
             "email": email,
             "password":password
         })
-        console.log(users);
+        console.log(JSON.stringify(users));
         return res.status(200).json({ message:  "username registered" })
     }
     

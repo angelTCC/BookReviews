@@ -1,5 +1,8 @@
+const cors = require('cors');
 const express = require('express');
 const app = express();
+
+app.use(cors()); // ✅ Allow cross-origin requests
 
 const genl_routers = require('./router/general.js').general;
 const customer_routes = require('./router/auth_users.js').regd_users;
