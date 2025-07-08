@@ -1,12 +1,39 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🎨 React Client – Book Review App
 
-Currently, two official plugins are available:
+This is the frontend of the Book Review App built with **React**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📄 Pages
 
-## Expanding the ESLint configuration
+- **Home**: Displays book list and current user (if logged)
+- **Register**: Register a new user
+- **Login**: Log in with existing credentials
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Tech
+
+- React
+- React Router
+- Bootstrap
+- `jwt-decode` to extract username from token
+
+## 🔐 Auth Flow
+
+- On login, token is saved to `localStorage`
+- Username is extracted using `jwt-decode`
+- Authenticated users can:
+  - Add a review
+  - Update their review
+  - Delete their review
+
+## 🚀 Start
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+## 🔧 Notes
+
+This client assumes the backend runs at http://localhost:3000
+Focus is on functionality, not design

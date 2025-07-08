@@ -1,37 +1,39 @@
 import { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
+import { useNavigate } from 'react-router-dom';
 
 export default function Register () {
-
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const registerFetch = async () => {
-    try {
-        const response = await fetch('http://127.0.0.1:3000/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json' // ✅ Correct way
-        },
-        body: JSON.stringify({
-            username: username,
-            email: email,
-            password: password,
-        })
-        });
+        try {
+            const response = await fetch('http://127.0.0.1:3000/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // ✅ Correct way
+            },
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                password: password,
+            })
+            });
 
-        const data = await response.json(); // ✅ Read the response body
+            const data = await response.json(); // ✅ Read the response body
 
-        if (response.ok) {
-        window.alert(data.message); // e.g., "username registered"
-        } else {
-        window.alert("Error: " + data.message); // e.g., "choose other username!"
+            if (response.ok) {
+            window.alert(data.message + 'now you can login'); // e.g., "username registered"
+            navigate('/customer/login');
+            } else {
+            window.alert("Error: " + data.message); // e.g., "choose other username!"
+            }
+        } catch (error) {
+            console.error('Network or server error:', error);
+            window.alert('Could not connect to server');
         }
-    } catch (error) {
-        console.error('Network or server error:', error);
-        window.alert('Could not connect to server');
-    }
     };
 
     return (

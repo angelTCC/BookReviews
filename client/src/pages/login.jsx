@@ -24,9 +24,12 @@ export default function Login() {
             const data = await response.json(); // ✅ Read the response body
 
             if (response.ok) {
-                window.alert(data.token);
+                window.alert('you are looged successfully, now you can add reviews');
                 localStorage.setItem('token', data.token);
-            } 
+                navigate('/');
+            } else {
+                window.alert("❌ " + (data.message || 'Login failed'));
+            }
         } catch(error) {
             console.log(error, 'Network error');
             window.alert('Could not connect to server');
